@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/custom :: head_html ">
+
+</head>
+
+<body class="nav-md preloading">
+
+ <!-- Hiệu ứng load -->
+  <div class="load ">
+	<img th:src="@{/images/loader.gif}">
+</div> 
+
+	<div class="container body">
+		<div class="main_container">
+			<div th:replace="layout/custom :: leftcol " class="col-md-3 left_col">
+
+			</div>
+
+			<!-- top navigation -->
+			<div th:replace="layout/custom :: top_navigation_html "
+				class="top_nav"></div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 ">
+
+
+
+
+						<div class="testbox">
+							<form th:action="@{/}" th:object="${congty}" method="post">
+								<div class="banner">
+									<h1>Add Information Form</h1>
+								</div>
+
+								<!--  ten cong ty -->
+								<div class="item">
+									<p>
+										Tên Công Ty<span class="required">*</span>
+									</p>
+									<input type="text" th:field="*{tencongty}"
+										placeholder="Nhập tên công ty" name="name" required />
+								</div>
+								<!--  Ngay thanh lap cong ty -->
+								<div class="item">
+									<p>Số nhân viên</p>
+									<!-- <input type="date" name="bdate" required /> <i class="fas fa-calendar-alt"></i> -->
+									<input type="number" th:field="*{soNhanVien}" id="quantity"
+										name="quantity" min="1">
+								</div>
+
+
+								<h5>1.Thông tin cơ bản của công ty:</h5>
+
+								<!-- MÃ số thuế công ty -->
+								<div class="city-item">
+									<div class="item1">
+										<p>
+											Mã số thuế<span class="required">*</span>
+										</p>
+										<input type="text" th:field="*{maSoThue}"
+											placeholder="nhập mã số thuế" name="name" required />
+									</div>
+
+
+									<div class="item1">
+										<p>
+											Địa chỉ công ty trong tòa nhà<span class="required">*</span>
+										</p>
+										<input type="text" th:field="*{diaChi}" name="name"
+											placeholder="Nhập địa chỉ công ty" required />
+									</div>
+									<div class="item1">
+										<p>
+											Lĩnh vựa hoạt động<span class="required">*</span>
+										</p>
+										<input type="text" name="name" th:field="*{linhVucHoatDong}"
+											placeholder="Nhập lĩnh vựa hoạt động" required />
+									</div>
+
+									<!--  Sodt      -->
+									<div class="item1">
+										<p>
+											Số điện thoại<span class="required">*</span>
+										</p>
+										<input type="text" th:field="*{soDienThoai}"
+											placeholder="Nhập số điện thoại" name="name" required />
+									</div>
+									<!--  Von dieu le      -->
+									<div class="item1">
+										<p>
+											Vốn điều lệ<span class="required">*</span>
+										</p>
+										<input type="text" th:field="*{vonDieuLe}"
+											placeholder="Nhập Vốn điều lệ" name="name" required />
+									</div>
+									<!--  Dt mat bang      -->
+									<div class="item1">
+										<p>
+											Diện tích mặt bằng<span class="required">*</span>
+										</p>
+										<input type="text" th:field="*{DtMatbang}"
+											placeholder="Nhập Diện tích mặt bằng" name="name" required />
+									</div>
+								</div>
+								<h5>2 Các dịch vụ công ty cần sử dụng:</h5>
+
+								<div class="question">
+									<p>
+										Chọn dịch vụ cho công ty :<span class="required">*</span>
+									</p>
+									<small>Please include the following in your
+										application.</small>
+									<div class="question-answer checkbox-item">
+										<div>
+											<table style="width: 80%" class="required">
+												<thead>
+													<tr>
+														<th>Chọn</th>
+														<th>Tên dịch vụ</th>
+														<th>Đơn giá</th>
+												</thead>
+												</tr>
+												<tbody>
+													<!-- <tr th:each="dv: ${dichvu}">
+										<td th:switch="${dv.maDv}">
+										<input th:case="'2'" type="checkbox" checked disabled="true" th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+										<input th:case="'4'" type="checkbox" checked disabled="true" th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+										<input th:case="*" type="checkbox" th:value="${dv.maDv}" id="check_1" name="dichvus" />
+															
+											</td>
+														<td th:text="${dv.tenDV}"></td>
+														<td th:text="${dv.donGia}"></td>
+
+													</tr> -->
+										<tr th:each="dv: ${dichvu}">
+										<!-- <td th:switch="${dv.maDv}">
+										<input th:case="'2'" type="checkbox" checked disabled="true" th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+										<input th:case="'4'" type="checkbox" checked disabled="true" th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+										<input th:case="*" type="checkbox" th:value="${dv.maDv}" id="check_1" name="dichvus" />
+															
+											</td> -->
+											<td th:if="${dv.maDv &lt;=2 }">
+											<input  type="checkbox" checked disabled="true" th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+											</td>
+											<td th:if="${dv.maDv &gt;2 }">
+											<input  type="checkbox"  th:value="${dv.maDv}" id="check_1" name="dichvus" /> 
+											</td>
+														<td th:text="${dv.tenDV}"></td>
+														<td th:text="${dv.donGia}"></td>
+
+													</tr>				
+												</tbody>
+											</table>
+
+										</div>
+
+									</div>
+								</div>
+								<br />
+
+
+								<div class="btn-block">
+									<button type="submit" href="/">Lưu công ty</button>
+								</div>
+							</form>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer th:replace="layout/custom :: footer_html "> </footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../vendors/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- FastClick -->
+	<script src="../vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="../vendors/nprogress/nprogress.js"></script>
+	<!-- Chart.js -->
+	<script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+	<!-- gauge.js -->
+	<script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+	<!-- bootstrap-progressbar -->
+	<script
+		src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<!-- iCheck -->
+	<script src="../vendors/iCheck/icheck.min.js"></script>
+	<!-- Skycons -->
+	<script src="../vendors/skycons/skycons.js"></script>
+	<!-- Flot -->
+	<script src="../vendors/Flot/jquery.flot.js"></script>
+	<script src="../vendors/Flot/jquery.flot.pie.js"></script>
+	<script src="../vendors/Flot/jquery.flot.time.js"></script>
+	<script src="../vendors/Flot/jquery.flot.stack.js"></script>
+	<script src="../vendors/Flot/jquery.flot.resize.js"></script>
+	<!-- Flot plugins -->
+	<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+	<script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+	<script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+	<!-- DateJS -->
+	<script src="../vendors/DateJS/build/date.js"></script>
+	<!-- JQVMap -->
+	<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+	<script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+	<script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script src="../vendors/moment/min/moment.min.js"></script>
+	<script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../build/js/custom.min.js"></script>
+	
+	 <script th:src="@{/build/js/callApi.js}"></script>
+	
+	<div th:replace="layout/custom ::footer"></div>
+</body>
+</html>
